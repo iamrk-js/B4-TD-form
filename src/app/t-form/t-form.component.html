@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-sm-12">
+        <form #userForm="ngForm" (ngSubmit)="onsubmit(userForm)" class="userForm">
+            <div class="form-group">
+                <label for="username" class="form-label"> username </label>
+                <input type="text" required #userName="ngModel" ngModel name="username" id="" class="form-control" />
+                <span class="alert alert-danger d-block" *ngIf="userName.invalid && userName.touched">
+                    Username is mandetory
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="email"> email </label>
+                <input type="text" required #email="ngModel" email ngModel name="email" id="" class="form-control" />
+                <span class="alert alert-danger d-block" *ngIf="email.invalid && email.touched">
+                    Username is mandetory
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="secrectQuestion"> Secrect Question</label>
+                <select name="secrectQuestion" required #secrectQuestion="ngModel" ngModel id="" class="form-control">
+                    <option value="favourite Teacher">favourite teacher</option>
+                    <option value="favourite Book">favourite Book</option>
+                </select>
+                <span class="alert alert-danger d-block" *ngIf="secrectQuestion.invalid && secrectQuestion.touched">
+                    Username is mandetory
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="modeOfcontact">Mode of contact</label>
+                <select name="modeOfcontact" ngModel #modeOfcontact="ngModel" id="" class="form-control" required>
+                    <option value="">Select Mode of contact</option>
+                    <option [value]="opt.id" *ngFor="let opt of contactMethods">
+                        {{ opt.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="isSubscribe">
+                    <input type="checkbox" ngModel #isSubscribe="ngModel" name="isSubscribe" id="" />
+                    Subscribe to email list
+                </label>
+            </div>
+            <div class="radio mb-2" *ngFor="let method of contactMethods">
+                <label>
+                    <input ngModel type="radio" required name="contactMethods" id="" [value]="method.id">
+                    {{method.name}}
+                </label>
+            </div>
+            <!-- <div class="radio">
+                <label>
+                    <input ngModel type="radio" name="contactMethods" id="" value="2">
+                    Phone
+                </label>
+            </div> -->
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit" [disabled]="userForm.invalid">
+                    Submit
+                </button>
+            </div>
+        </form>
+
+        {{ userForm.value | json }}
+    </div>
+</div>
